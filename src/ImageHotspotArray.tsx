@@ -66,7 +66,7 @@ export function ImageHotspotArray(
     const builder = imageUrlBuilder(sanityClient).dataset(sanityClient.config().dataset ?? '')
     const urlFor = (source: ImageValue) => builder.image(source)
 
-    if(hotspotImage?.type === 'cloudinary.asset'){
+    if(hotspotImage?._type === 'cloudinary.asset'){
      const obj:{
         width:number,
         height:number,
