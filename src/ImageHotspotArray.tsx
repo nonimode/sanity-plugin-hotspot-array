@@ -1,27 +1,26 @@
 /* eslint-disable react/display-name */
 
-import {getImageDimensions} from '@sanity/asset-utils'
+import imageUrlBuilder from '@sanity/image-url'
+import { Card, Flex, Stack } from '@sanity/ui'
+import { randomKey } from '@sanity/util/content'
+import get from 'lodash/get'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import {
   ArrayOfObjectsInputProps,
   ImageValue,
-  insert,
   ObjectSchemaType,
   PatchEvent,
+  insert,
   set,
   setIfMissing,
   useClient,
   useFormValue,
 } from 'sanity'
-import imageUrlBuilder from '@sanity/image-url'
-import {Card, Flex, Stack} from '@sanity/ui'
-import {randomKey} from '@sanity/util/content'
-import get from 'lodash/get'
-import React, {useCallback, useMemo, useRef, useState} from 'react'
 
-import {IUseResizeObserverCallback, useDebouncedCallback, useResizeObserver} from '@react-hookz/web'
+import { IUseResizeObserverCallback, useDebouncedCallback, useResizeObserver } from '@react-hookz/web'
 import Feedback from './Feedback'
 import Spot from './Spot'
-import {ImageHotspotOptions} from './plugin'
+import { ImageHotspotOptions } from './plugin'
 
 const imageStyle = {width: `100%`, height: `auto`}
 
@@ -68,11 +67,16 @@ export function ImageHotspotArray(
     const urlFor = (source: ImageValue) => builder.image(source)
 
     if(hotspotImage?.type === 'cloudinary.asset'){
-     return{
-        width:hotspotImage.width,
-        height:hotspotImage.height,
-        url : hotspotImage.secure_url 
+     const obj:{
+        width:number,
+        height:number,
+        url:string
+     } = {
+        width:Number(hotspotImage.width),
+        height:Number(hotspotImage.height),
+        url : String(hotspotImage.secure_url)
      }
+     return obj;
     }
     
     /*
