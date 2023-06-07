@@ -67,6 +67,16 @@ export function ImageHotspotArray(
     const builder = imageUrlBuilder(sanityClient).dataset(sanityClient.config().dataset ?? '')
     const urlFor = (source: ImageValue) => builder.image(source)
 
+    if(hotspotImage?.type === 'cloudinary.asset'){
+     return{
+        width:hotspotImage.width,
+        height:hotspotImage.height,
+        url : hotspotImage.secure_url 
+     }
+    }
+    
+    /*
+    
     if (hotspotImage?.asset?._ref) {
       const {aspectRatio} = getImageDimensions(hotspotImage.asset._ref)
       const width = 1200
@@ -76,6 +86,7 @@ export function ImageHotspotArray(
       return {width, height, url}
     }
 
+*/
     return null
   }, [hotspotImage, sanityClient])
 
