@@ -1,3 +1,5 @@
+> this fork hotspots to work with images of type `cloudinary.asset`
+
 # sanity-plugin-hotspot-array
 
 >This is a **Sanity Studio v3** plugin.
